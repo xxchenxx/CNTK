@@ -145,7 +145,7 @@ H = np.zeros((N, N), dtype = np.float32)
 H = cp.asarray(H)
 from tqdm import tqdm
 for i in tqdm(prange(N)):
-	for j in tqdm(prange(N)):
+	for j in prange(N):
 		H[i][j] = xz(X[i], X[j], L[i], L[j], iL[i], iL[j])
 #####
 
