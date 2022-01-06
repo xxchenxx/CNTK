@@ -14,7 +14,7 @@ def load_cifar(path = "cifar-10-batches-py"):
 	X_train= np.vstack(tuple(train_batches)).reshape(-1, 3, 32, 32)
 	y_train = np.array(train_labels)
 
-	cifar_out = pickle.load(open(os.path.join(path, "test_batch")))
+	cifar_out = pickle.load(open(os.path.join(path, "test_batch"), "rb"), encoding='iso-8859-1')
 	X_test = cifar_out["data"].reshape(-1, 3, 32, 32)
 	y_test = cifar_out["labels"]
 	
