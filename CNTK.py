@@ -10,8 +10,12 @@ parser = argparse.ArgumentParser(description = 'Convolutional Neural Tangent Ker
 parser.add_argument('--depth', default = 21, type = int, help = 'depth of CNTK (#conv layers + 1)')
 parser.add_argument('--gap', default = "yes", type = str, help = 'whether GAP (global average pooling) is used')
 parser.add_argument('--fix', default = "yes", type = str, help = 'whether first layer and last layer are fixed (or trained) (see Section 4.2 in our paper)')
+parser.add_argument('--seed', default=1, type=int)
 args = parser.parse_args()
 
+
+cupy.random.seed(args.seed)
+np.random.seed(args.seed)
 d = args.depth
 gap = (args.gap == "yes")
 fix = (args.fix == "yes")
@@ -155,5 +159,5 @@ Y_train = np.ones((N_train, 10)) * -0.1
 for i in range(N_train):
 	Y_train[i][y_train[i]] = 0.9
 u = H[N_train:, :N_train].dot(scipy.linalg.solve(H[:N_train, :N_train], Y_train))
-pickle.dump([u, y_test], open(f"{seed}.pkl", 'wb'))
+pickle.dump([u, y_test], open(f"{args.seed}.pkl", 'wb'))
 print("test accuracy:", 1.0 * np.sum(np.argmax(u, axis = 1) == y_test) / N_test)
