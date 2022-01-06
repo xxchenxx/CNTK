@@ -14,7 +14,7 @@ parser.add_argument('--seed', default=1, type=int)
 args = parser.parse_args()
 
 
-cupy.random.seed(args.seed)
+cp.random.seed(args.seed)
 np.random.seed(args.seed)
 d = args.depth
 gap = (args.gap == "yes")
