@@ -143,11 +143,9 @@ for i in range(N):
 #####Parallelize this part according to your specific computing enviroment to utilize multiple GPUs.
 H = np.zeros((N, N), dtype = np.float32)
 H = cp.asarray(H)
-L = cp.asarray(np.stack(L))
-iL = cp.asarray(np.stack(iL))
 from tqdm import tqdm
-for i in tqdm(prange(N)):
-	for j in prange(N):
+for i in tqdm(range(N)):
+	for j in range(N):
 		H[i][j] = xz(X[i], X[j], L[i], L[j], iL[i], iL[j])
 #####
 
