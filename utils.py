@@ -18,6 +18,8 @@ def load_cifar(path = "cifar-10-batches-py"):
 	X_test = cifar_out["data"].reshape(-1, 3, 32, 32)
 	y_test = cifar_out["labels"]
 	
+
+	X_train = X_train[:2000]
 	X_train = (X_train / 255.0).astype(np.float32) 
 	X_test = (X_test / 255.0).astype(np.float32) 
 	mean = X_train.mean(axis = (0, 2, 3)) 
