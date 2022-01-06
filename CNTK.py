@@ -1,4 +1,5 @@
 import cupy as cp
+import pickle
 import numpy as np
 import argparse
 import scipy.linalg
@@ -154,4 +155,5 @@ Y_train = np.ones((N_train, 10)) * -0.1
 for i in range(N_train):
 	Y_train[i][y_train[i]] = 0.9
 u = H[N_train:, :N_train].dot(scipy.linalg.solve(H[:N_train, :N_train], Y_train))
+pickle.dump([u, y_test], open(f"{seed}.pkl", 'wb'))
 print("test accuracy:", 1.0 * np.sum(np.argmax(u, axis = 1) == y_test) / N_test)
