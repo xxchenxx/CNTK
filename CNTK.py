@@ -141,6 +141,7 @@ for i in range(N):
 #####Below we provide a naive implementation using for-loops.
 #####Parallelize this part according to your specific computing enviroment to utilize multiple GPUs.
 H = np.zeros((N, N), dtype = np.float32)
+H = cp.asarray(H)
 from tqdm import tqdm
 for i in tqdm(range(N)):
 	for j in tqdm(range(N)):
