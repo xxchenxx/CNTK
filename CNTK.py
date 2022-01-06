@@ -145,8 +145,8 @@ H = np.zeros((N, N), dtype = np.float32)
 H = cp.asarray(H)
 print(L[:10])
 print(iL[:10])
-L = cp.asarray(np.array(L))
-iL = cp.asarray(np.array(iL))
+L = cp.asarray(np.stack(L))
+iL = cp.asarray(np.stack(iL))
 from tqdm import tqdm
 for i in tqdm(prange(N)):
 	for j in prange(N):
