@@ -158,6 +158,7 @@ for i in tqdm(range(N)):
 Y_train = np.ones((N_train, 10)) * -0.1
 for i in range(N_train):
 	Y_train[i][y_train[i]] = 0.9
+H = H.get()
 u = H[N_train:, :N_train].dot(scipy.linalg.solve(H[:N_train, :N_train], Y_train))
 pickle.dump([u, y_test], open(f"{args.seed}.pkl", 'wb'))
 print("test accuracy:", 1.0 * np.sum(np.argmax(u, axis = 1) == y_test) / N_test)
