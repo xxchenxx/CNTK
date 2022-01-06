@@ -143,8 +143,8 @@ for i in range(N):
 #####Parallelize this part according to your specific computing enviroment to utilize multiple GPUs.
 H = np.zeros((N, N), dtype = np.float32)
 H = cp.asarray(H)
-print(L[:100])
-print(il[:100])
+print(L[:10])
+print(iL[:10])
 L = cp.asarray(np.array(L))
 iL = cp.asarray(np.array(iL))
 from tqdm import tqdm
