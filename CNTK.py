@@ -141,8 +141,9 @@ for i in range(N):
 #####Below we provide a naive implementation using for-loops.
 #####Parallelize this part according to your specific computing enviroment to utilize multiple GPUs.
 H = np.zeros((N, N), dtype = np.float32)
-for i in range(N):
-	for j in range(N):
+from tqdm import tqdm
+for i in tqdm(range(N)):
+	for j in tqdm(range(N)):
 		H[i][j] = xz(X[i], X[j], L[i], L[j], iL[i], iL[j])
 #####
 
