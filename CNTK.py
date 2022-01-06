@@ -3,6 +3,7 @@ import numpy as np
 import argparse
 import scipy.linalg
 from utils import load_cifar
+from numba import cuda, jit, prange
 
 parser = argparse.ArgumentParser(description = 'Convolutional Neural Tangent Kernel (CNTK) for CIFAR-10')
 parser.add_argument('--depth', default = 21, type = int, help = 'depth of CNTK (#conv layers + 1)')
@@ -110,7 +111,7 @@ def xz(x, z, Lx, Lz, iLx, iLz):
 	if not fix:
 		T += S
 
-	for i in range(1, d - 1):
+	for i in prange(1, d - 1):
 		trans(trans_blocks, trans_threads, (S, T, Lx[i], Lz[i], iLx[i], iLz[i]))		
 		conv3(conv_blocks, conv_threads, (S, S))
 		conv3(conv_blocks, conv_threads, (T, T))
@@ -143,8 +144,8 @@ for i in range(N):
 H = np.zeros((N, N), dtype = np.float32)
 H = cp.asarray(H)
 from tqdm import tqdm
-for i in tqdm(range(N)):
-	for j in tqdm(range(N)):
+for i in tqdm(prange(N)):
+	for j in tqdm(prange(N)):
 		H[i][j] = xz(X[i], X[j], L[i], L[j], iL[i], iL[j])
 #####
 
