@@ -3,8 +3,8 @@ import numpy as onp
 from neural_tangents import stax
 
 import neural_tangents as nt
-from jax.experimental.stax import (AvgPool, BatchNorm, Conv, Dense, FanInSum,
-                                   FanOut, Flatten, GeneralConv, Identity, MaxPool,
+from neural_tangents.stax import (AvgPool, BatchNorm, Conv, Dense, FanInSum,
+                                   FanOut, Flatten, GeneralConv, MaxPool,
                                    Relu, LogSoftmax)
 
 def BasicBlock(planes, strides=(1,1)):
