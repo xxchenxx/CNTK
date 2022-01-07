@@ -3,7 +3,7 @@ import numpy as onp
 from neural_tangents import stax
 
 import neural_tangents as nt
-from neural_tangents.stax import (AvgPool, BatchNorm, Conv, Dense, FanInSum,
+from neural_tangents.stax import (AvgPool, LayerNorm, Conv, Dense, FanInSum,
                                    FanOut, Flatten, GeneralConv, MaxPool,
                                    Relu, LogSoftmax)
 
@@ -12,13 +12,13 @@ def BasicBlock(planes, strides=(1,1)):
     
     residual = stax.serial(
         Conv(planes, (3,3), strides, padding='SAME'), 
-        BatchNorm(), Relu,
+        LayerNorm(), Relu,
         Conv(planes, (3,3), strides=(1,1), padding='SAME'), 
-        BatchNorm()
+        LayerNorm()
     )
     
     identity = stax.serial(
-        Conv(planes, (1, 1), strides), BatchNorm()
+        Conv(planes, (1, 1), strides), LayerNorm()
     )
     
     out = stax.serial(
@@ -35,15 +35,15 @@ def Bottleneck(planes, strides=(1,1)):
     
     residual = stax.serial(
         Conv(planes, (1,1), strides=(1,1), padding='SAME'), 
-        BatchNorm(), Relu,
+        LayerNorm(), Relu,
         Conv(planes, (3,3), strides=strides, padding='SAME'), 
-        BatchNorm(), Relu,
+        LayerNorm(), Relu,
         Conv(planes*_expansion, (1,1), strides=(1,1), padding='SAME'), 
-        BatchNorm()
+        LayerNorm()
     )
     
     identity = stax.serial(
-        Conv(planes*_expansion, (1, 1), strides), BatchNorm()
+        Conv(planes*_expansion, (1, 1), strides), LayerNorm()
     )
     
     out = stax.serial(
@@ -73,7 +73,7 @@ def ResNet(block_op, blocks, planes, num_classes, img_dim=(224,224),
     _format = (img_fmt, kernel_fmt, output_fmt)
     first_layer = stax.serial(
         GeneralConv(_format, 64, (7, 7), strides=(2,2), padding='SAME'),
-        BatchNorm(), Relu,
+        LayerNorm(), Relu,
         MaxPool((3, 3), strides=(2, 2), padding='SAME')
     )
     
