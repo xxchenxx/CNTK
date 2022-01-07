@@ -4,7 +4,7 @@ from neural_tangents import stax
 
 import neural_tangents as nt
 from neural_tangents.stax import (AvgPool, LayerNorm, Conv, Dense, FanInSum,
-                                   FanOut, Flatten, GeneralConv, MaxPool,
+                                   FanOut, Flatten, MaxPool,
                                    Relu, LogSoftmax)
 
 def BasicBlock(planes, strides=(1,1)):
@@ -72,7 +72,7 @@ def ResNet(block_op, blocks, planes, num_classes, img_dim=(224,224),
     # First block
     _format = (img_fmt, kernel_fmt, output_fmt)
     first_layer = stax.serial(
-        GeneralConv(_format, 64, (7, 7), strides=(2,2), padding='SAME'),
+        Conv(64, (7, 7), strides=(2,2), padding='SAME'),
         LayerNorm(), Relu,
         MaxPool((3, 3), strides=(2, 2), padding='SAME')
     )
