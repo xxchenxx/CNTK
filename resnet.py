@@ -3,7 +3,7 @@ import numpy as onp
 from neural_tangents import stax
 
 import neural_tangents as nt
-from neural_tangents.stax import (AvgPool, BatchNorm, Conv, Dense, FanInSum,
+from jax.experimental.stax import (AvgPool, BatchNorm, Conv, Dense, FanInSum,
                                    FanOut, Flatten, GeneralConv, Identity, MaxPool,
                                    Relu, LogSoftmax)
 
