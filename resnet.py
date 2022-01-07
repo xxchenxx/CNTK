@@ -1,6 +1,6 @@
 import functools
 import numpy as onp
-from neural_tangents import stax
+from jax.experimental import stax
 
 import neural_tangents as nt
 from jax.experimental.stax import (AvgPool, BatchNorm, Conv, Dense, FanInSum,
