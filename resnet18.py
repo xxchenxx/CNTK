@@ -15,12 +15,12 @@ y_test = jax.numpy.array(y_test)
 
 
 print(X_train.shape)
-
+_, params = init_fn(key1, X_train.shape)
 kernel_fn = nt.empirical_kernel_fn(apply_fn, vmap_axes=0, implementation=2)
 kernel_fn_batched = nt.batch(kernel_fn, device_count=-1, batch_size=5)
-_, params = init_fn(key1, X_train.shape)
-k_test_train = kernel_fn(X_test, X_train, params)
-k_train_train = kernel_fn(X_train, None, params)
+
+k_test_train = kernel_fn_batched(X_test, X_train, params)
+k_train_train = kernel_fn_batched(X_train, None, params)
 
 from jax.example_libraries import stax
 from neural_tangents import predict
