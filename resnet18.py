@@ -8,10 +8,10 @@ from jax import random
 key1, key2 = random.split(random.PRNGKey(int(sys.argv[1])), 2)
 init_fn, apply_fn = ResNet18(num_classes=10, img_dim=(32, 32))
 (X_train, y_train), (X_test, y_test) = load_cifar()
-X_train = jax.ndarray.array(X_train)
-X_test = jax.ndarray.array(X_test)
-y_train = jax.ndarray.array(y_train)
-y_test = jax.ndarray.array(y_test)
+X_train = jax.numpy.array(X_train)
+X_test = jax.numpy.array(X_test)
+y_train = jax.numpy.array(y_train)
+y_test = jax.numpy.array(y_test)
 
 
 print(X_train.shape)
